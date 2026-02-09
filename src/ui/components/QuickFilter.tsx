@@ -45,39 +45,41 @@ export const QuickFilter = ({ selectedCategory, onSelectCategory }: QuickFilterP
 
     if (isLoading) {
         return (
-            <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
-                {[1, 2, 3, 4, 5].map(i => (
-                    <div key={i} className="h-24 bg-slate-100 animate-pulse rounded-xl"></div>
-                ))}
+            <div className="mb-6 -mx-4 px-4 overflow-x-auto scrollbar-hide">
+                <div className="flex gap-2 pb-2">
+                    {[1, 2, 3, 4, 5].map(i => (
+                        <div key={i} className="h-10 w-24 bg-slate-200 animate-pulse rounded-full flex-shrink-0"></div>
+                    ))}
+                </div>
             </div>
         );
     }
 
     return (
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
-            {allCategories.map((cat) => (
-                <button
-                    key={cat.id}
-                    onClick={() => onSelectCategory(cat.id)}
-                    className={`
-                        relative overflow-hidden rounded-xl p-4 h-24 w-full sm:w-40 lg:w-44 flex flex-col items-center justify-center gap-2 transition-all duration-300 border border-transparent
-                        ${selectedCategory === cat.id
-                            ? `ring-2 ${cat.ringColor} ring-offset-2 shadow-md scale-[1.02] bg-white border-slate-100`
-                            : `${cat.color} hover:shadow-sm hover:scale-[1.01] opacity-90 hover:opacity-100`
-                        }
-                    `}
-                >
-                    <span className="text-3xl">{cat.emoji}</span>
-                    <span className={`font-bold text-sm ${selectedCategory === cat.id ? 'text-blue-700' : 'text-slate-700'}`}>
-                        {cat.label}
-                    </span>
-
-                    {/* Active Indicator */}
-                    {selectedCategory === cat.id && (
-                        <div className={`absolute top-2 right-2 w-2 h-2 rounded-full animate-pulse ${cat.id === 'TODOS' ? 'bg-blue-600' : 'bg-slate-800'}`} />
-                    )}
-                </button>
-            ))}
+        <div className="mb-6 -mx-4 px-4 overflow-x-auto scrollbar-hide">
+            <div className="flex gap-2 md:gap-3 md:flex-wrap md:justify-center pb-2 md:pb-0">
+                {allCategories.map((cat) => (
+                    <button
+                        key={cat.id}
+                        onClick={() => onSelectCategory(cat.id)}
+                        className={`
+                            relative flex-shrink-0 rounded-full md:rounded-xl 
+                            px-4 py-2 md:px-5 md:py-4
+                            flex items-center md:flex-col gap-2 md:gap-1
+                            transition-all duration-200 border border-transparent
+                            ${selectedCategory === cat.id
+                                ? `ring-2 ${cat.ringColor} ring-offset-1 shadow-md bg-white border-slate-200`
+                                : `${cat.color} hover:shadow-sm opacity-90 hover:opacity-100`
+                            }
+                        `}
+                    >
+                        <span className="text-xl md:text-2xl">{cat.emoji}</span>
+                        <span className={`font-semibold text-sm whitespace-nowrap ${selectedCategory === cat.id ? 'text-blue-700' : 'text-slate-700'}`}>
+                            {cat.label}
+                        </span>
+                    </button>
+                ))}
+            </div>
         </div>
     );
 };

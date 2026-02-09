@@ -6,6 +6,7 @@ import { HomeNavbar } from '@/ui/components/HomeNavbar';
 import { QuickFilter } from '@/ui/components/QuickFilter';
 import { ProductCard } from '@/ui/components/ProductCard';
 import { CartDrawer } from '@/ui/components/CartDrawer';
+import { Footer } from '@/ui/components/Footer';
 import { Search } from 'lucide-react';
 
 export const HomePage = () => {
@@ -54,10 +55,10 @@ export const HomePage = () => {
     }, [searchTerm, selectedCategory, products]);
 
     return (
-        <div className="min-h-screen bg-slate-50 pb-20">
+        <div className="min-h-screen bg-slate-50 flex flex-col">
             <HomeNavbar onOpenCart={() => setIsCartOpen(true)} />
 
-            <main className="max-w-7xl mx-auto px-4 pt-8">
+            <main className="flex-1 max-w-7xl mx-auto px-4 pt-8 pb-8 w-full">
 
                 {/* Search Bar */}
                 <div className="flex justify-center mb-8">
@@ -112,6 +113,9 @@ export const HomePage = () => {
                 )}
 
             </main>
+
+            {/* Footer */}
+            <Footer />
 
             {/* Cart Drawer */}
             <CartDrawer isOpen={isCartOpen} onOpenChange={setIsCartOpen} />
