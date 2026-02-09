@@ -56,27 +56,33 @@ export const QuickFilter = ({ selectedCategory, onSelectCategory }: QuickFilterP
     }
 
     return (
-        <div className="mb-6 -mx-4 px-4 overflow-x-auto scrollbar-hide">
-            <div className="flex gap-2 md:gap-3 md:flex-wrap md:justify-center pb-2 md:pb-0">
+        <div className="mb-6 md:mb-8 -mx-4 px-4 md:mx-0 md:px-0 overflow-x-auto md:overflow-visible scrollbar-hide">
+            <div className="flex gap-2 md:gap-4 md:flex-wrap md:justify-center pb-2 md:pb-0">
                 {allCategories.map((cat) => (
                     <button
                         key={cat.id}
                         onClick={() => onSelectCategory(cat.id)}
                         className={`
-                            relative flex-shrink-0 rounded-full md:rounded-xl 
-                            px-4 py-2 md:px-5 md:py-4
-                            flex items-center md:flex-col gap-2 md:gap-1
-                            transition-all duration-200 border border-transparent
+                            relative flex-shrink-0 
+                            rounded-full md:rounded-xl 
+                            px-4 py-2 md:p-4 md:h-24 md:w-40 lg:w-44
+                            flex items-center md:flex-col gap-2 md:gap-2 md:justify-center
+                            transition-all duration-300 border border-transparent
                             ${selectedCategory === cat.id
-                                ? `ring-2 ${cat.ringColor} ring-offset-1 shadow-md bg-white border-slate-200`
-                                : `${cat.color} hover:shadow-sm opacity-90 hover:opacity-100`
+                                ? `ring-2 ${cat.ringColor} ring-offset-2 shadow-md md:scale-[1.02] bg-white border-slate-100`
+                                : `${cat.color} hover:shadow-sm md:hover:scale-[1.01] opacity-90 hover:opacity-100`
                             }
                         `}
                     >
-                        <span className="text-xl md:text-2xl">{cat.emoji}</span>
-                        <span className={`font-semibold text-sm whitespace-nowrap ${selectedCategory === cat.id ? 'text-blue-700' : 'text-slate-700'}`}>
+                        <span className="text-xl md:text-3xl">{cat.emoji}</span>
+                        <span className={`font-bold text-sm whitespace-nowrap ${selectedCategory === cat.id ? 'text-blue-700' : 'text-slate-700'}`}>
                             {cat.label}
                         </span>
+
+                        {/* Active Indicator - Desktop only */}
+                        {selectedCategory === cat.id && (
+                            <div className={`hidden md:block absolute top-2 right-2 w-2 h-2 rounded-full animate-pulse ${cat.id === 'TODOS' ? 'bg-blue-600' : 'bg-slate-800'}`} />
+                        )}
                     </button>
                 ))}
             </div>
