@@ -1,4 +1,8 @@
 import api from './api';
+import { mockCategories, mockProducts } from './mock-data';
+
+// Set to true to use mock data (MVP mode), false to use real backend
+const USE_MOCK_DATA = true;
 
 export interface Category {
     id: string;
@@ -25,6 +29,12 @@ export interface Product {
 }
 
 export const getCategories = async (): Promise<Category[]> => {
+    if (USE_MOCK_DATA) {
+        // Simulate network delay for realistic UX
+        await new Promise(resolve => setTimeout(resolve, 300));
+        return mockCategories;
+    }
+
     try {
         const response = await api.get('/products/categories');
         return response.data;
@@ -35,6 +45,18 @@ export const getCategories = async (): Promise<Category[]> => {
 };
 
 export const getProducts = async (): Promise<Product[]> => {
+    if (USE_MOCK_DATA) {
+        // Simulate network delay for realistic UX
+        await new Promise(resolve => setTimeout(resolve, 400));
+        return mockProducts.map((p) => ({
+            ...p,
+            nombre: p.name,
+            precio_bolsa: p.pricePerBag || p.price,
+            precio_kilo: p.pricePerKilo,
+            categoria: p.category?.name || 'Sin Categoría',
+        }));
+    }
+
     try {
         const response = await api.get('/products');
         // Map backend response if needed, for now assume direct match but keep safety

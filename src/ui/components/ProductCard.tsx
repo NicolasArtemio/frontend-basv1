@@ -33,14 +33,18 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
     return (
         <div className="group bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col h-full">
-            {/* Image Placeholder */}
-            <div className="h-48 bg-slate-50 flex items-center justify-center relative overflow-hidden">
+            {/* Product Image */}
+            <div className="aspect-square bg-white flex items-center justify-center relative overflow-hidden p-4">
                 {product.image || product.imagen ? (
-                    <img src={product.image || product.imagen} alt={product.name || product.nombre} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img
+                        src={product.image || product.imagen}
+                        alt={product.name || product.nombre}
+                        className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-500 drop-shadow-sm"
+                    />
                 ) : (
                     <span className="text-slate-300 font-bold text-4xl select-none opacity-20">BAS</span>
                 )}
-                <div className={`absolute top-3 right-3 text-xs font-bold px-3 py-1 rounded-full border ${getCategoryColor(categoryName)}`}>
+                <div className={`absolute top-3 right-3 text-xs font-bold px-3 py-1.5 rounded-full border shadow-sm ${getCategoryColor(categoryName)}`}>
                     {categoryName}
                 </div>
             </div>

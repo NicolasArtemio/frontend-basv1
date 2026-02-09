@@ -24,6 +24,7 @@ export const QuickFilter = ({ selectedCategory, onSelectCategory }: QuickFilterP
         if (normalized.includes('PERRO')) return { emoji: '🐶', color: 'bg-blue-100', text: 'text-blue-700', ring: 'ring-blue-600' };
         if (normalized.includes('GATO')) return { emoji: '🐱', color: 'bg-orange-100', text: 'text-orange-700', ring: 'ring-orange-600' };
         if (normalized.includes('ACCESORIOS')) return { emoji: '🎾', color: 'bg-purple-100', text: 'text-purple-700', ring: 'ring-purple-600' };
+        if (normalized.includes('HIGIENE')) return { emoji: '🧴', color: 'bg-green-100', text: 'text-green-700', ring: 'ring-green-600' };
         return { emoji: '🐹', color: 'bg-slate-100', text: 'text-slate-700', ring: 'ring-slate-600' };
     };
 
